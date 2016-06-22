@@ -10,30 +10,30 @@ import helpers from '../utils/helpers.jsx'
 
 class Profile extends React.Component {
 	constructor(){
-        super();
-        this.state = {
-            notes: [],
-            bio: [],
-            repos: []
-        };
-        this.handleAddNote = this.handleAddNote.bind(this);
-    }
+    super();
+    this.state = {
+        notes: [],
+        bio: [],
+        repos: []
+    };
+    this.handleAddNote = this.handleAddNote.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    this.unbind('notes')
+    this.init(nextProps.params.username)
+  }
+  init(username){
+    this.firebaseRef = firebase.database().ref(username + '/notes')
+    this.bindAsArray(this.firebaseRef, 'notes');
+    helpers.getGithubInfo(username).then(function(data){
+      this.setState({
+        bio: data.bio,
+        repos: data.repos
+      })
+    }.bind(this))
+  }
   componentDidMount(){
-      var config = {
-          apiKey: process.env.FIREBASE_API_KEY,
-          authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-          databaseURL: process.env.FIREBASE_DATABASE_URL,
-          storageBucket: process.env.FIREBASE_STORAGE_BUCKET
-      };
-      firebase.initializeApp(config);
-      this.firebaseRef = firebase.database().ref(this.props.params.username + '/notes')
-      this.bindAsArray(this.firebaseRef, 'notes');
-      helpers.getGithubInfo(this.props.params.username).then(function(data){
-        this.setState({
-          bio: data.bio,
-          repos: data.repos
-        })
-      }.bind(this))
+      this.init(this.props.params.username)
   }
 
   componentWillUnmount(){
