@@ -20,7 +20,7 @@ class AddNotes extends React.Component {
 				<form onSubmit={this.handleSubmit}>
 					<input type="text" className="form-control" placeholder="Add New Note" ref={this.setRef}/>
 					<span className='input-group-btn'>
-						<button className="btn btn-default" type="button">Submit</button>
+						<button className="btn btn-default" type="submit">Submit</button>
 					</span>
 				</form>
 			</div>
