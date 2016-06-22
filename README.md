@@ -1,2 +1,2 @@
-# react-firebase
-First React-Firebase App
+# react-es6-github-app
+First React-Firebase app in ES6
