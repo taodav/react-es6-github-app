@@ -15,6 +15,7 @@ class Profile extends React.Component {
             bio: [],
             repos: []
         }
+        this.handleAddNote = this.handleAddNote.bind(this)
     }
     componentDidMount(){
         var config = {
@@ -32,18 +33,24 @@ class Profile extends React.Component {
         this.unbind('notes')
     }
 
+    handleAddNote(newNote){
+      firebase.database().ref(this.props.params.username + "/notes/" + this.state.notes.length).set(newNote)
+    }
     render(){
       return(
           <div className="row">
-          <div className="col-md-4">
-          <UserProfiles username={this.props.params.username} bio={this.state.bio} />
-          </div>
-          <div className="col-md-4">
-          <Repos username={this.props.params.username} repos={this.state.repos} />
-          </div>
-          <div className="col-md-4">
-          <Notes username={this.props.params.username} notes={this.state.notes} />
-          </div>
+            <div className="col-md-4">
+              <UserProfiles username={this.props.params.username} bio={this.state.bio} />
+            </div>
+            <div className="col-md-4">
+              <Repos username={this.props.params.username} repos={this.state.repos} />
+            </div>
+            <div className="col-md-4">
+              <Notes 
+              addNote={this.handleAddNote}
+              username={this.props.params.username} 
+              notes={this.state.Notes} />
+            </div>
           </div>
           )
   }
