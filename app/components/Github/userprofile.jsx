@@ -3,8 +3,16 @@ import React from 'react'
 class UserProfiles extends React.Component {
 	render(){
 		return <div>
-			<p>Username: {this.props.username}</p>
-			<p>Bio: {this.props.bio}</p>
+	        {this.props.bio.login && <a href={this.props.bio.html_url}><h3>{this.props.bio.login}</h3></a>}
+			{this.props.bio.avatar_url && <li className="list-group-item"> <img src={this.props.bio.avatar_url} className="img-rounded img-responsive"/></li>}
+	        {this.props.bio.name && <li className="list-group-item">Name: {this.props.bio.name}</li>}
+	        {this.props.bio.email && <li className="list-group-item">Email: {this.props.bio.email}</li>}
+	        {this.props.bio.location && <li className="list-group-item">Location: {this.props.bio.location}</li>}
+	        {this.props.bio.company && <li className="list-group-item">Company: {this.props.bio.company}</li>}
+	        {this.props.bio.followers && <li className="list-group-item">Followers: {this.props.bio.followers}</li>}
+	        {this.props.bio.following && <li className="list-group-item">Following: {this.props.bio.following}</li>}
+	        {this.props.bio.following && <li className="list-group-item">Public Repos: {this.props.bio.public_repos}</li>}
+	        {this.props.bio.blog && <li className="list-group-item">Blog: <a href={this.props.bio.blog}> {this.props.bio.blog}</a></li>}	
 		</div>
 	}
 }
