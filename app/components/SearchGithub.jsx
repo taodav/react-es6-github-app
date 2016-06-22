@@ -11,7 +11,7 @@ class SearchGithub extends React.Component {
 	handleSubmit(){
 		let username = this.usernameRef.value;
 		this.usernameRef.value = '';
-		hashHistory.push('profile/' + username)
+		hashHistory.push('/profile/' + username)
 	}
 
 	getRef(ref){
